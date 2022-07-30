@@ -9,10 +9,15 @@ return new class extends Migration {
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-
-
-
+            $table->unsignedBigInteger('post_id');
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->longText('content');
+            $table->tinyInteger('level')->default(1);
+            $table->string('created_by', 255);
             $table->timestamps();
+
+            $table->foreign('post_id')->references('id')->on('posts')
+                ->cascadeOnDelete();
         });
     }
 

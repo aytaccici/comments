@@ -2,37 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Facades\ApiResponse;
+use App\Http\Resources\PostResource;
+use App\Services\PostService;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
+    /**
+     * @var PostService
+     */
+    protected $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     public function index()
     {
+        $posts = PostResource::collection($this->postService->getPostWithComments(config('app.pagination_value')));
 
-    }
-
-    public function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
-    }
-
-    public function show(Post $post)
-    {
-    }
-
-    public function edit(Post $post)
-    {
-    }
-
-    public function update(Request $request, Post $post)
-    {
-    }
-
-    public function destroy(Post $post)
-    {
+        return ApiResponse::success($posts);
     }
 }

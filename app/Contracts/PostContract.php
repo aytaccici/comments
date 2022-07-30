@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-interface PostContact
+interface PostContract
 {
 
 }

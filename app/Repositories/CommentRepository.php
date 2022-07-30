@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Contracts\PostContract;
-use App\Models\Post;
+use App\Contracts\CommentContract;
+use App\Models\Comment;
 
-class PostRepository extends  BaseRepository implements PostContract
+class CommentRepository extends  BaseRepository implements CommentContract
 {
 
     /**
@@ -13,6 +13,6 @@ class PostRepository extends  BaseRepository implements PostContract
      */
     protected function entity()
     {
-        return Post::class;
+        return Comment::class;
     }
 }

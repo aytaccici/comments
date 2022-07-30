@@ -6,7 +6,7 @@ namespace App\Contracts;
      * Interface RepositoryContract
      * @package App\Contracts
      */
-interface RepositoryContact
+interface RepositoryContract
 {
     /**
      * @return mixed

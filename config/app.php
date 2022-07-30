@@ -123,6 +123,12 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    /**
+     * Default pagination value
+     */
+
+    'pagination_value' => 20,
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -175,6 +181,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\RepositoryServiceProvider::class,
+        App\Providers\ResponseFacadeServiceProvider::class,
     ],
 
     /*
@@ -229,6 +237,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'ApiResponse' =>  \App\Facades\ApiResponse::class,
 
     ],
 

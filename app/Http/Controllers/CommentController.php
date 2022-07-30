@@ -2,37 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCommentRequest;
+use App\Services\CommentService;
+use Illuminate\Http\Response;
 
-class CommentsController extends Controller
+class CommentController extends Controller
 {
-    public function index()
-    {
+    protected  $commentService;
 
+    public function __construct(CommentService  $commentService)
+    {
+        $this->commentService = $commentService;
     }
 
-    public function create()
+    public function store(StoreCommentRequest $request, $id)
     {
-    }
+         $this->commentService->store($id, $request->validated());
 
-    public function store(Request $request)
-    {
-    }
-
-    public function show(Comment $comment)
-    {
-    }
-
-    public function edit(Comment $comment)
-    {
-    }
-
-    public function update(Request $request, Comment $comment)
-    {
-    }
-
-    public function destroy(Comment $comment)
-    {
+        return response()->json([], Response::HTTP_CREATED);
     }
 }

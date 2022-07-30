@@ -9,9 +9,13 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'parent_id' => 'nullable|numeric',
+            'content' => 'required|string',
+            'created_by' => 'required|string',
+            'level'  => 'required|numeric'
         ];
     }
+
 
     public function authorize(): bool
     {

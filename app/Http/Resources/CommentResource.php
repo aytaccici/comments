@@ -2,10 +2,13 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Models\Comment */class CommentResource extends JsonResource{
+/** @mixin \App\Models\Comment */
+class CommentResource extends JsonResource
+{
     /**
      * @param Request $request
      * @return array
@@ -13,12 +16,12 @@ use Illuminate\Http\Request;
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-'post_id' => $this->post_id,
-'content' => $this->content,
-'created_by' => $this->created_by,
-'created_at' => $this->created_at,
-'updated_at' => $this->updated_at,
+            'id'         => $this->id,
+            'content'    => $this->content,
+            'replies'   => CommentResource::collection($this->whenLoaded('replies')),
+            'level'      => $this->level,
+            'created_by' => $this->created_by,
+            'created_at' => Carbon::parse($this->created_at)->diffForHumans(),
         ];
     }
 }

@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Contracts\CommentContract;
+use App\Contracts\PostContract;
+use App\Repositories\CommentRepository;
+use App\Repositories\PostRepository;
 use Illuminate\Support\ServiceProvider;
 
-class RepositotyServiceProvider extends ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
@@ -13,5 +17,7 @@ class RepositotyServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->app->bind(PostContract::class, PostRepository::class);
+        $this->app->bind(CommentContract::class, CommentRepository::class);
     }
 }
