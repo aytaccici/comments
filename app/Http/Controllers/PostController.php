@@ -20,8 +20,14 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = PostResource::collection($this->postService->getPostWithComments(config('app.pagination_value')));
+        $posts = PostResource::collection($this->postService->paginate(config('app.pagination_value')));
 
         return ApiResponse::success($posts);
+    }
+
+    public function show($id)
+    {
+        $post =  new PostResource($this->postService->getPostWithComments($id));
+        return ApiResponse::success($post);
     }
 }

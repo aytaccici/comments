@@ -16,8 +16,7 @@ class PostRepository extends  BaseRepository implements PostContract
         return Post::class;
     }
 
-    public function getPostWithComments(int $perPage){
-        return $this->entity->with(['comments','comments.replies'])->latest()
-            ->paginate($perPage);
+    public function getPostWithComments(int $postId){
+        return $this->entity->where('id', '=', $postId)->with(['comments','comments.replies'])->first();
     }
 }

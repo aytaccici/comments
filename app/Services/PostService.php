@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\PostContract;
+use App\Exceptions\PostNotFoundException;
 use App\Repositories\PostRepository;
 
 class PostService
@@ -34,8 +35,13 @@ class PostService
      * @param int $perPage
      * @return mixed
      */
-    public function getPostWithComments(int $perPage =20){
-        return $this->postContract->getPostWithComments($perPage);
+    public function getPostWithComments(int $id){
+
+        $post =  $this->postContract->getPostWithComments($id);
+        if (!$post){
+            throw new PostNotFoundException();
+        }
+        return $post;
     }
 
 }
