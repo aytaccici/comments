@@ -22,4 +22,4 @@ Route::get('v1/posts', [\App\Http\Controllers\PostController::class, 'index'])->
 Route::get('v1/posts/{id}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
 
-Route::post('v1/comments/{postId}', [\App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
+Route::post('v1/comments', [\App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');

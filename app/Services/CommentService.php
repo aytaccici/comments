@@ -45,14 +45,16 @@ class CommentService
      * @return mixed
      * @throws PostNotFoundException
      */
-    public function store(int $postId, array  $attributes){
+    public function store(array  $attributes){
 
-        $post =  $this->postContract->show($postId);
-
+        $post =  $this->postContract->show(data_get($attributes,'post_id'));
         if (!$post){
             throw new PostNotFoundException('Post not found');
         }
+
         $attributes['post_id'] = data_get($post, 'id');
+        $attributes['level'] = data_get($attributes, 'level', 1);
+
         return $this->commentContract->store($attributes);
     }
 }

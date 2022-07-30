@@ -1,0 +1,139 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Comments API",
+        "description": "Comments Api",
+        "contact": {
+            "email": "aytaccici@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "http://comment.test",
+            "description": "Comments API"
+        }
+    ],
+    "paths": {
+        "/api/v1/comments": {
+            "post": {
+                "tags": [
+                    "comments"
+                ],
+                "summary": "Save A comment for post",
+                "description": "You can log in to sytem using this end point",
+                "operationId": "Save Comment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "post_id",
+                                    "content",
+                                    "creted_by"
+                                ],
+                                "properties": {
+                                    "post_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "parent_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "My content"
+                                    },
+                                    "creted_by": {
+                                        "type": "string",
+                                        "example": "Aytac Cici"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfull"
+                    },
+                    "400": {
+                        "description": "Bad Response"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/posts": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "get all posts",
+                "description": "You can get all posts using this endpoint",
+                "operationId": "posts",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Current page. Default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "500": {
+                        "description": "Server Errror "
+                    }
+                }
+            }
+        },
+        "/api/v1/posts/{id}": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "get single post",
+                "description": "You can get a single post with Post Id",
+                "operationId": "get single post",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Post Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Post Not Found "
+                    },
+                    "500": {
+                        "description": "Server Errror "
+                    }
+                }
+            }
+        }
+    }
+}
