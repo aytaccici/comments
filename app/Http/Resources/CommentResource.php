@@ -17,6 +17,8 @@ class CommentResource extends JsonResource
     {
         return [
             'id'         => $this->id,
+            'post_id'    => $this->post_id,
+            'parent_id'    => $this->parent_id,
             'content'    => $this->content,
             'comments'   => CommentResource::collection($this->whenLoaded('replies')),
             'level'      => $this->level,

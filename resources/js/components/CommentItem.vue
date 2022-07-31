@@ -10,7 +10,7 @@
                     <span class="ml-2 text-xs font-normal text-gray-500">{{ comment.created_at }}</span></div>
                 <div class="flex-1 px-2 ml-2 text-sm font-medium leading-loose text-gray-600">{{ comment.content }}
                 </div>
-                <button v-if="comment.level < 3" class="inline-flex items-center px-1 pt-2 ml-1 flex-column">
+                <button @click="clickReplyButton" v-if="comment.level < 3" class="inline-flex items-center px-1 pt-2 ml-1 flex-column">
                     <svg viewBox="0 0 95 78" xmlns="http://www.w3.org/2000/svg"
                          class="w-5 h-5 ml-2 text-gray-600 cursor-pointer fill-current hover:text-gray-900">
                         <path
@@ -20,6 +20,7 @@
                 </button>
             </div>
         </div>
+        <NewComment v-on:onSaved="onSaved" v-if="showCommentArea" :current="comment"></NewComment>
         <div :style="indent" v-if="comment.comments.length>0">
             <CommentItem
                 v-for="child in comment.comments"
@@ -28,16 +29,41 @@
                 :depth="depth + 1"
             />
         </div>
+
     </div>
 </template>
 <script>
+
+import NewComment from "./NewComment";
 export default {
     name: "commentItem",
     props: ["comment", 'depth'],
+    components: {
+        NewComment
+    },
+    created() {
+
+    },
     computed: {
         indent() {
             return { marginLeft: `${this.depth * 50}px)` }
         }
     },
+    methods: {
+        clickReplyButton() {
+             this.showCommentArea= !this.showCommentArea;
+        },
+        onSaved(){
+            this.clickReplyButton();
+            this.$emit('onRefreshPage');
+        }
+    },
+    data () {
+        return {
+            showCommentArea : false,
+            newComment : {} ,
+        }
+
+    }
 }
 </script>
