@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "1fda2caa-02eb-4ea6-86d6-d22cf2be96d4",
+		"name": "Comments Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2537702"
+	},
+	"item": [
+		{
+			"name": "Gel Post With Comments",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Post",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Gel Post With Comments Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parent_id\" : 3,\n    \"content\" : \"Level 2 Yoruma cevap 4\",\n    \"level\" : 3,\n    \"created_by\" : \"Ahmet CC\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ROOT_URL}}comments/1",
+					"host": [
+						"{{ROOT_URL}}comments"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "ROOT_URL",
+			"value": "http://comment.test/api/v1/"
+		}
+	]
+}
