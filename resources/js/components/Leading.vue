@@ -6,10 +6,10 @@
 </template>
 <script>
 export default {
-    name : "header",
+    name : "leading",
     data () {
         return {
-            title : "My Blog",
+            title : "My Blog Test",
             message : "We use an agile approach to test assumptions and connect with the needs of your audience early and often."
         }
     }
