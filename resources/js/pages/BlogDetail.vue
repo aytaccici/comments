@@ -1,43 +1,46 @@
 <template>
+    <div class="container w-full md:max-w-3xl mx-auto pt-20">
+        <div class="w-full min-h-screen px-4 md:px-6 text-xl text-gray-800 leading-normal" style="font-family:Georgia,serif;">
+            <!--Title-->
+            <div class="font-sans">
+                <h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl">{{post.title}}</h1>
+                <p class="text-sm md:text-base font-normal text-gray-600">Published at {{post.created_at}}</p>
+                <p class="text-sm text-end md:text-base font-normal text-gray-600">Published by {{post.created_by}}</p>
+            </div>
+            <p class="py-6 font-sans break-normal text-gray-900">
+                {{post.content}}
+            </p>
+            <hr>
 
-    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <Leading></Leading>
-        <div class="grid gap-8 lg:grid-cols-2">
-         <PostItem :post="post" :key="post.id" v-for="post in posts"></PostItem>
-        </div>
-        <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mt-8">
-            <Pagination :meta="meta" v-on:pageChange="getPosts"></Pagination>
+            <p class="py-6 font-sans break-normal text-gray-900">
+                <CommentItem :depth="0" :key="'comment-item-'+ comment.id+'-'+post.title" v-for="comment in post.comments" :comment="comment"></CommentItem>
+            </p>
         </div>
     </div>
+    <!--/container-->
+
 </template>
 <script>
-import PostItem from "../components/PostItem";
-import Leading from "../components/Leading";
-import Pagination from "../components/Pagination";
+import PostService from '../services/post.service'
 export default {
-    name : "blog",
-    components : {PostItem, Leading, Pagination},
+    name : "blogDetail",
+    components : {
+    },
     methods: {
-        getPosts(page = 1) {
-            console.log('page' + page)
-            window.axios.get("http://comment.test/api/v1/posts", {params : {page}}).
+        getPost(id) {
+            PostService.GetSingleWithComments(id).
             then(response => {
-                this.posts = response.data.data
-                this.meta = response.data.meta
-            }).catch(response =>{
-                console.log(response.message)
+                this.post= response.data.data
             })
         }
     },
     created() {
-        this.getPosts(1);
+        this.getPost(this.$route.params.id);
     },
     data () {
         return {
-            posts : null,
-            meta : {} ,
+            post : {},
         }
-
     }
 }
 </script>

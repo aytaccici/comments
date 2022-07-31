@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-    name : "footer",
+    name : "footerr",
     data () {
         return {
             year : 2022,

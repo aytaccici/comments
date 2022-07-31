@@ -18,6 +18,8 @@ class PostResource extends JsonResource
         return [
             'id'         => $this->id,
             'title'      => $this->title,
+            'content'    => $this->content,
+            'heading'    => substr($this->content, 0, 150),
             'category'   => $this->category,
             'comments'   => CommentResource::collection($this->whenLoaded('comments')),
             'created_by' => $this->created_by,

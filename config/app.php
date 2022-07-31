@@ -127,7 +127,7 @@ return [
      * Default pagination value
      */
 
-    'pagination_value' => 20,
+    'pagination_value' => 2,
 
     /*
     |--------------------------------------------------------------------------

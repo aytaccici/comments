@@ -18,7 +18,7 @@ class CommentResource extends JsonResource
         return [
             'id'         => $this->id,
             'content'    => $this->content,
-            'replies'   => CommentResource::collection($this->whenLoaded('replies')),
+            'comments'   => CommentResource::collection($this->whenLoaded('replies')),
             'level'      => $this->level,
             'created_by' => $this->created_by,
             'created_at' => Carbon::parse($this->created_at)->diffForHumans(),
